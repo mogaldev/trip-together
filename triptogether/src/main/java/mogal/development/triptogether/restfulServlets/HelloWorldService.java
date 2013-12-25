@@ -1,5 +1,7 @@
 package mogal.development.triptogether.restfulServlets;
 
+import java.util.Date;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -30,6 +32,12 @@ public class HelloWorldService {
 	@Path("/{country}")
 	public Response sayHelloCountry(@PathParam("country") String country) {
 		return getApplicationJsonTypeResponse("Hello " + country + "!!!");
+	}
+	
+	@GET
+	@Path("/getTime")
+	public String getTime() {
+		return new Date().toString();
 	}
 	
 	private Response getApplicationJsonTypeResponse(String string) {

@@ -6,6 +6,7 @@
 		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body data-ng-controller="MyCtrl">
+	
 		<input type="text" data-ng-model="name">
 		<button data-ng-click="pushTheButton(name)">Push The Button</button>
 		<button data-ng-click="pushTheButtonPost(name)">Push The Button (post)</button><br>
@@ -14,5 +15,6 @@
 
 		<button data-ng-click="changeLocation()">change location to FirstServlet</button>
 		{{locationString}}
+
 	</body>
 </html>

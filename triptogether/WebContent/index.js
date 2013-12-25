@@ -3,15 +3,21 @@ var app = angular.module('MyApp', []);
 app.service('MyService', function($http) {
 	
 	this.get = function(urlPath, parameters, sucssesCallBack) {
-		$http({method:'GET',url:urlPath,params:parameters}).success(sucssesCallBack);
+		$http({method:'GET',url:urlPath,params:parameters}).success(sucssesCallBack).error(this.errorResponse);
 	};
 	
 	this.post = function(urlPath, parameters, sucssesCallBack) {
-		$http({method:'POST',url:urlPath,params:parameters}).success(sucssesCallBack);
+		$http({method:'POST',url:urlPath,params:parameters}).success(sucssesCallBack).error(this.errorResponse);
+	};
+	
+	this.errorResponse = function() {
+		alert('request failed');
 	};
 });
 
 app.controller('MyCtrl', function($scope, $location, MyService) {
+	
+	$scope.currentTime = "wait for server...";
 
 	$scope.changeLocation = function() {
 		$scope.locationString = $location.absUrl();
@@ -25,8 +31,8 @@ app.controller('MyCtrl', function($scope, $location, MyService) {
 		});
 	};
 	
-	$scope.pushTheButtonPost = function(name) {
-		var url = $location.absUrl() + 'services/hello/';
+	$scope.pushTheButtonPost = function() {
+		var url = $location.absUrl() + 'services/hello/getTime';
 		MyService.post(url, null, function(data, status, headers, config) {
 			$scope.answer = '';
 			$scope.answerPost = data;
