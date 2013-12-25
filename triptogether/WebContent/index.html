@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html data-ng-app="MyApp">
+	<head>
+		<title>Title!!</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+	</head>
+	<body data-ng-controller="MyCtrl">
+		<input type="text" data-ng-model="name">
+		<button data-ng-click="pushTheButton(name)">Push The Button</button>
+		<button data-ng-click="pushTheButtonPost(name)">Push The Button (post)</button><br>
+		{{answer}}
+		{{answerPost}}<br><br><br>
+
+		<button data-ng-click="changeLocation()">change location to FirstServlet</button>
+		{{locationString}}
+	</body>
+</html>
