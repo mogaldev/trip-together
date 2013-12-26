@@ -13,10 +13,13 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+
 	@Column(name = "name")
 	private String name;
+
 	@Column(name = "image_url")
 	private String imageUrl;
+
 	@Column(name = "image_credits_url")
 	private String imageCreditsUrl;
 
