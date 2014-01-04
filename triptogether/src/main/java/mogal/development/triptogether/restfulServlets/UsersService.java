@@ -3,23 +3,26 @@ package mogal.development.triptogether.restfulServlets;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.servlet.http.HttpServlet;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import mogal.development.triptogether.ejbs.PersistenceEjbLocal;
 import mogal.development.triptogether.entities.User;
+import mogal.development.triptogether.restfulServlets.responseBuilder.ResponseBuilder;
 import mogal.development.triptogether.utilities.Converter;
 import mogal.development.triptogether.utilities.DateUtils;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-@Path("/user")
-public class UsersService {
-
+@Stateless
+@Path("/users")
+public class UsersService extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	@EJB
 	PersistenceEjbLocal ejb;
 
@@ -34,22 +37,21 @@ public class UsersService {
 			jsonArray.add(getUserAsJson(user));
 		}
 		
-		return getApplicationJsonTypeResponse(jsonArray);
-	}
-	
-	private Response getApplicationJsonTypeResponse(JsonElement jsonElement) {
-		return Response.ok(jsonElement).type(MediaType.APPLICATION_JSON_TYPE).build();
+		return ResponseBuilder.generateResponseOK(jsonArray);
 	}
 	
 	private JsonObject getUserAsJson(User user) {
 		JsonObject json = new JsonObject();
 		json.addProperty("Id", user.getId());
-		json.addProperty("UserName", user.getUserName());
+		json.addProperty("FirstName", user.getFirstName());
+		json.addProperty("LastName", user.getLastName());
 		json.addProperty("Email", user.getEmail());
+		json.addProperty("ImageUrl", user.getImageUrl());
 		json.addProperty("BirthDate", DateUtils.getDateFormat(user.getBirthDate()));
 		json.addProperty("City", Converter.nvl(user.getCity()));
 		json.addProperty("IsLogedIn", user.getIsLogedIn());
 		
 		return json;
 	}
+	
 }

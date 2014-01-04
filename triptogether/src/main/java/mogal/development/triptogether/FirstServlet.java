@@ -48,7 +48,7 @@ public class FirstServlet extends HttpServlet {
 		builder.append("starting... </br>");
 
 		for (User user : users) {
-			builder.append(user.getUserName());
+			builder.append(user.getFirstName() + " " + user.getLastName());
 			builder.append(": ");
 			builder.append(user.getBirthDate());
 			builder.append(",");

@@ -24,11 +24,17 @@ public class User implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="last_name")
+	private String lastName;
+
 	@Column(name="email")
 	private String email;
-	
-	@Column(name="user_name")
-	private String userName;
+
+	@Column(name="image_url")
+	private String imageUrl;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="birth_date")
@@ -43,13 +49,29 @@ public class User implements Serializable {
 	public User() {
 		
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -60,12 +82,12 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public Date getBirthDate() {
