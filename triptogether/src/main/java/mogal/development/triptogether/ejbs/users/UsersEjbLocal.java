@@ -12,4 +12,5 @@ public interface UsersEjbLocal {
 	public User getUserById(Long userId);
 	public Long addUser(User newUser);
     public void updateUser(User userToUpdate);
+    public void deleteUser(Long userId);
 }

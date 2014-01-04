@@ -23,13 +23,20 @@ public class DateUtils {
 	}
 	
 	public static Date getStringFromDate(String date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-		try {
-			return dateFormat.parse(date);
-		} catch (ParseException e) {
-			logger.error(e.getMessage());
+		if(date == null) {
 			return null;
 		}
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+		Date dateToReturn = null;
+		
+		try {
+			dateToReturn = dateFormat.parse(date);
+		} catch (ParseException e) {
+			logger.error(e.getMessage());
+		}
+		
+		return dateToReturn;
 	}
 	
 }

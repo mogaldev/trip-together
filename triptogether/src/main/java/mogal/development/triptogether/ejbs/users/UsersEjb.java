@@ -30,4 +30,8 @@ public class UsersEjb extends PersistenceEjb implements UsersEjbLocal {
     	em.merge(userToUpdate);
     }
     
+    public void deleteUser(Long userId) {
+    	User userById = getUserById(userId);
+    	em.remove(userById);
+    }
 }

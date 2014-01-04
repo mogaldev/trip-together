@@ -5,10 +5,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServlet;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import mogal.development.triptogether.ejbs.users.UsersEjbLocal;
@@ -29,7 +32,6 @@ public class UsersService extends HttpServlet {
 	UsersEjbLocal ejb;
 
 	@GET
-	@Path("/get-all-users")
 	public Response getAllUsers() {		
 		// Get all users
 		List<User> users = ejb.getUsers();
@@ -44,13 +46,12 @@ public class UsersService extends HttpServlet {
 	}
 	
 	@POST
-	@Path("/register-user")
-	public Response registerUser(	@FormParam("firstName") String firstName,
-									@FormParam("lastName") String lastName,
-									@FormParam("email") String email,
-									@FormParam("imageUrl") String imageUrl,
-									@FormParam("birthDate") String birthDate,
-									@FormParam("city") String city) {
+	public Response createUser(	@FormParam("firstName") String firstName,
+								@FormParam("lastName") String lastName,
+								@FormParam("email") String email,
+								@FormParam("imageUrl") String imageUrl,
+								@FormParam("birthDate") String birthDate,
+								@FormParam("city") String city) {
 		User newUser = new User();
 		newUser.setFirstName(firstName);
 		newUser.setLastName(lastName);
@@ -63,9 +64,9 @@ public class UsersService extends HttpServlet {
 		return ResponseBuilder.generateResponseOK(userId);
 	}
 	
-	@POST
-	@Path("/update-user")
-	public Response updateUser(	@FormParam("userId") Long userId,
+	@PUT
+	@Path("/{userId}")
+	public Response updateUser(	@PathParam("userId") Long userId,
 								@FormParam("firstName") String firstName,
 								@FormParam("lastName") String lastName,
 								@FormParam("email") String email,
@@ -87,6 +88,14 @@ public class UsersService extends HttpServlet {
 		ejb.updateUser(userById);
 		
 		return ResponseBuilder.generateResponseOK(userById.getId());
+	}
+	
+	@DELETE
+	@Path("/{userId}")
+	public Response deleteUser(@PathParam("userId") Long userId) {
+		ejb.deleteUser(userId);
+		
+		return ResponseBuilder.generateResponseOK(null);
 	}
 	
 	private JsonObject getUserAsJson(User user) {

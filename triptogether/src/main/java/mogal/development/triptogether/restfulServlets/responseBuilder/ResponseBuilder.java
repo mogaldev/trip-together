@@ -19,6 +19,8 @@ public class ResponseBuilder {
 		generated.addProperty(RESPONSE_CODE_KEY, RESPONSE_CODE_OK);
 		generated.add(ERROR_KEY, new JsonObject());
 		
+		data = (data == null) ? "" : data;
+		
 		if(data instanceof JsonElement) {
 			JsonElement dataJsonElement = (JsonElement) data;
 			generated.add(DATA_KEY, dataJsonElement);
