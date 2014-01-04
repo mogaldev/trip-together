@@ -75,6 +75,10 @@ public class UsersService extends HttpServlet {
 								@FormParam("city") String city) {
 		// Get the user to update from DB
 		User userById = ejb.getUserById(userId);
+		
+		if(userById == null) {
+			return ResponseBuilder.generateResponseERR("User not found");
+		}
 
 		// Update the user data
 		userById.setFirstName(firstName);
