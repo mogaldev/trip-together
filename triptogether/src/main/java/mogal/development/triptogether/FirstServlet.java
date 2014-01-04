@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mogal.development.triptogether.ejbs.PersistenceEjbLocal;
-import mogal.development.triptogether.entities.Product;
+import mogal.development.triptogether.entities.User;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,29 +37,28 @@ public class FirstServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StringBuilder builder = new StringBuilder();
-		List<Product> products = ejb.getProducts();
+		List<User> users = ejb.getUsers();
 		
 		builder.append("<!DOCTYPE html>");
 		builder.append("<html>");
 		builder.append("<head>");
-		builder.append("<title>asdasdasasd</title>");
+		builder.append("<title>Users</title>");
 		builder.append("</head>");
 		builder.append("<body>");
 		builder.append("starting... </br>");
 
-		for (Product product : products) {
-			builder.append(product.getName());
-			builder.append("<img src='" + product.getImageUrl() + "' width='50' height='50'>");
+		for (User user : users) {
+			builder.append(user.getUserName());
+			builder.append(": ");
+			builder.append(user.getBirthDate());
+			builder.append(",");
+			builder.append("is loged in = " + user.getIsLogedIn().toString());
 			builder.append("</br></br>");
 		}
 		
 		builder.append("done!");
 		builder.append("</body>");
 		builder.append("</html>");
-		logger.debug("debug");
-		logger.debug("debug");
-		logger.error("error");
-		logger.error("error");
 		
 		response.getOutputStream().write(builder.toString().getBytes());
 	}

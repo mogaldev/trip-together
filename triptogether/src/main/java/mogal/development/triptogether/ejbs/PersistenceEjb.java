@@ -9,7 +9,7 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import mogal.development.triptogether.entities.Product;
+import mogal.development.triptogether.entities.User;
 
 /**
  * Session Bean implementation class PersistenceEjb
@@ -28,11 +28,11 @@ public class PersistenceEjb implements PersistenceEjbLocal {
     public PersistenceEjb() {
     }
     
-    public List<Product> getProducts() {
+    public List<User> getUsers() {
     	@SuppressWarnings("unchecked")
-		List<Product> products = entityManager.createNamedQuery("Product.findAll").getResultList();
+		List<User> users = entityManager.createNamedQuery("User.findAll").getResultList();
     	
-    	return products;
+    	return users;
     }
     
 }

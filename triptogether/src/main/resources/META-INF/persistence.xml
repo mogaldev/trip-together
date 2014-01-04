@@ -6,11 +6,10 @@
 
 	<persistence-unit name="TripTogetherPersistence" transaction-type="JTA">
 		<jta-data-source>java:/jdbc/galdb</jta-data-source>
-
-		<class>mogal.development.triptogether.entities.Product</class>
+		<class>mogal.development.triptogether.entities.User</class>
 
 		<properties>
-			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.logging.level.sql" value="FINE" />
 			<property name="eclipselink.logging.parameters" value="true" />
 			<property name="eclipselink.jdbc.cache-statements" value="false" />
