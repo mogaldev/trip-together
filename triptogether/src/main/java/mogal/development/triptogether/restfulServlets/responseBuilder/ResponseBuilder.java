@@ -14,20 +14,32 @@ public class ResponseBuilder {
 	private static final String RESPONSE_CODE_OK = "OK";
 	private static final String RESPONSE_CODE_ERR = "ERR";
 	
-	public static Response generateResponseOK(JsonElement data) {
+	public static Response generateResponseOK(Object data) {
 		JsonObject generated = new JsonObject();
 		generated.addProperty(RESPONSE_CODE_KEY, RESPONSE_CODE_OK);
-		generated.add(DATA_KEY, data);
 		generated.add(ERROR_KEY, new JsonObject());
+		
+		if(data instanceof JsonElement) {
+			JsonElement dataJsonElement = (JsonElement) data;
+			generated.add(DATA_KEY, dataJsonElement);
+		} else {
+			generated.addProperty(DATA_KEY, data.toString());
+		}
 		
 		return getApplicationJsonTypeResponse(generated);
 	}
 	
-	public static Response generateResponseERR(JsonElement error) {
+	public static Response generateResponseERR(Object error) {
 		JsonObject generated = new JsonObject();
 		generated.addProperty(RESPONSE_CODE_KEY, RESPONSE_CODE_ERR);
 		generated.add(DATA_KEY, new JsonObject());
-		generated.add(ERROR_KEY, error);
+		
+		if(error instanceof JsonElement) {
+			JsonElement errorJsonElement = (JsonElement) error;
+			generated.add(ERROR_KEY, errorJsonElement);
+		} else {
+			generated.addProperty(ERROR_KEY, error.toString());
+		}
 		
 		return getApplicationJsonTypeResponse(generated);
 	}

@@ -6,6 +6,6 @@ import javax.persistence.PersistenceContext;
 public abstract class PersistenceEjb implements PersistenceEjbLocal {
 	
 	@PersistenceContext(unitName="TripTogetherPersistence")
-	protected EntityManager entityManager;
+	protected EntityManager em;
 	
 }

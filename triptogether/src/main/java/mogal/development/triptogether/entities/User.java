@@ -15,9 +15,11 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "SELECT p FROM User p")
+@NamedQuery(name = User.NAMED_QUERY_FIND_ALL, query = "SELECT p FROM User p")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String NAMED_QUERY_FIND_ALL = "User.findAll";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
