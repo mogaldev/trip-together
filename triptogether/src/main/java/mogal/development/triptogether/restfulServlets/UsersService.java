@@ -9,7 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import mogal.development.triptogether.ejbs.PersistenceEjbLocal;
+import mogal.development.triptogether.ejbs.users.UsersEjbLocal;
 import mogal.development.triptogether.entities.User;
 import mogal.development.triptogether.restfulServlets.responseBuilder.ResponseBuilder;
 import mogal.development.triptogether.utilities.Converter;
@@ -24,9 +24,10 @@ public class UsersService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	PersistenceEjbLocal ejb;
+	UsersEjbLocal ejb;
 
 	@GET
+	@Path("/get-all-users")
 	public Response getAllUsers() {		
 		// Get all users
 		List<User> users = ejb.getUsers();

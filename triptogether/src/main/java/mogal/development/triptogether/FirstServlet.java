@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mogal.development.triptogether.ejbs.PersistenceEjbLocal;
+import mogal.development.triptogether.ejbs.users.UsersEjbLocal;
 import mogal.development.triptogether.entities.User;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +26,7 @@ public class FirstServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	PersistenceEjbLocal ejb;
+	UsersEjbLocal ejb;
 	Logger logger;
 	
 	@Override
