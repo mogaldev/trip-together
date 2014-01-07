@@ -29,7 +29,7 @@ public class UsersService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	UsersEjbLocal ejb;
+	private UsersEjbLocal ejb;
 
 	@GET
 	public Response getAllUsers() {		
@@ -43,6 +43,14 @@ public class UsersService extends HttpServlet {
 		}
 		
 		return ResponseBuilder.generateResponseOK(jsonArray);
+	}
+	
+	@GET
+	@Path("/{userId}")
+	public Response getAllUsers(@PathParam("userId") Long userId) {		
+		User selectedUser = ejb.getUserById(userId);
+
+		return ResponseBuilder.generateResponseOK(getUserAsJson(selectedUser));
 	}
 	
 	@POST
@@ -98,6 +106,14 @@ public class UsersService extends HttpServlet {
 	@Path("/{userId}")
 	public Response deleteUser(@PathParam("userId") Long userId) {
 		ejb.deleteUser(userId);
+		
+		return ResponseBuilder.generateResponseOK(null);
+	}
+	
+	@DELETE
+	@Path("/all")
+	public Response deleteAllUsers() {
+		ejb.deleteAll();
 		
 		return ResponseBuilder.generateResponseOK(null);
 	}

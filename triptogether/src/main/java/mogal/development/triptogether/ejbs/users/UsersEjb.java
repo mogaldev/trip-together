@@ -34,4 +34,11 @@ public class UsersEjb extends PersistenceEjb implements UsersEjbLocal {
     	User userById = getUserById(userId);
     	em.remove(userById);
     }
+    
+    public void deleteAll() {
+    	List<User> users = getUsers();
+    	for (User user : users) {
+    		em.remove(user);
+		}
+    }
 }
